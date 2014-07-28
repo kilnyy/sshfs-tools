@@ -14,10 +14,7 @@ To use these routines,
 
 1. Copy `addfs` and `rmfs` to `/usr/local/bin`.
 2. Copy `sshfs-tools.sh` to somewhere (e.g. ~/.sshfs-tools.sh).
-3. Add the following line to your .bashrc:
-```
-source ~/.ssh-tools.sh
-```
+3. Add the following line to your .bashrc: `source ~/.ssh-tools.sh`
 4. Restart your bash
 
 Then,
