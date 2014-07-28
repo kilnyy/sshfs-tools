@@ -1,7 +1,7 @@
 sshfs-tools
 ===========
 
-Some bash scripts that help using sshfs simple.
+Some bash scripts that help using sshfs manage mount remote file systems simple.
 
 Getting Start
 --------
