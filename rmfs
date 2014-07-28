@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#
+# AUTHOR:   Xu Mingzhao
+# CREATED:  2014-07-25 18:58:10
+# MODIFIED: 2014-07-25 18:58:38
+
+
+if [ ! $SSHFS_TOOLS_DIR ] ; then
+    echo "Please export SSHFS_TOOLS_DIR FIRST"
+    exit
+fi
+
+if [ ! $1 ] ; then
+    echo "USAGE: rmfs server"
+    exit
+fi
+
+umount $SSHFS_TOOLS_DIR/$1
+rm -df $SSHFS_TOOLS_DIR/$1

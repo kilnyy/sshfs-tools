@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+#
+# AUTHOR:   Xu Mingzhao
+# CREATED:  2014-07-25 18:31:04
+# MODIFIED: 2014-07-25 18:57:47
+
+if [ ! $SSHFS_TOOLS_DIR ] ; then
+    echo "Please export SSHFS_TOOLS_DIR FIRST"
+    exit
+fi
+
+if [ ! $1 ] ; then
+    echo "USAGE: addfs user@server:/path/to/dir"
+    exit
+fi
+
+if [ ! -e ${SSHFS_TOOLS_DIR} ] ; then
+    mkdir $SSHFS_TOOLS_DIR
+fi
+
+arr=(${1//:/ })
+remote=${arr[0]}
+arr=(${remote//@/ })
+name=${arr[@]:(-1)}
+
+path=$SSHFS_TOOLS_DIR/$name
+
+if [ ! -e $path ] ; then
+    mkdir $path
+fi
+
+res=`sshfs $1 $path 2>&1`
+
+if [ ! $res ] ; then
+    if [ -e $SSHFS_TOOLS_HISTORY ] ; then
+        while read p ; do
+            if [ $1 == $p ] ; then
+                let has=true
+            fi
+        done < "$SSHFS_TOOLS_HISTORY"
+    fi
+    if [ ! $has ] ; then
+        echo $1 >> "$SSHFS_TOOLS_HISTORY"
+    fi
+else
+    rm -df $path
+fi
